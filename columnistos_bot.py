@@ -31,14 +31,18 @@ COMPLETE_NAMES = {
     'perfil': 'Perfil',
     'abc': 'ABC Color',
     'lanacionpy': 'La Nación',
-    'ultimahora': 'Última Hora'
+    'ultimahora': 'Última Hora',
+    'ElPais': 'El Pais',
+    'LaDiaria': 'La Diaria',
+    'ElObservador': 'El Observador',
+    'LaRepublica': 'La Republica'
 }
 MIN_NEW_ARTICLES = 2
 MIN_PERCENT_SOME = 45
 
 
 NO_WOMAN = [
-    'Ayer en la página principal de {medio} no hubo níngúna columna ' +
+    'Ayer en la página principal de {medio} no hubo ninguna columna ' +
     'de opinión {escrita} por mujeres.',
 
     'Las {total} columnas de opinión de la página principal de {medio}, ' +
