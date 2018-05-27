@@ -7,7 +7,7 @@ from diarios.items import DiariosItem
 
 
 class ElPaisSpider(scrapy.Spider):
-    name = 'ElPais'
+    name = 'elpais'
     allowed_domains = ['www.elpais.com.uy']
     start_urls = ['https://www.elpais.com.uy/opinion']
 
@@ -31,11 +31,11 @@ class ElPaisSpider(scrapy.Spider):
 
         loader.add_xpath('title', "./h3[contains(@class,'listing-title')]/a/text()")
         loader.add_xpath('author', "./div[contains(@class,'listing-author-name')]/text()")
-        
 
-        loader.add_xpath('url', "./div[contains(@class,'listing-author-name')]/text()")
+
+        loader.add_xpath('url', "./h3[contains(@class,'listing-title')]/a/@href")
         loader.add_xpath('site', "./div[contains(@class,'listing-author-name')]/text()")
-        loader.add_xpath('added', "./div[contains(@class,'listing-author-name')]/text()")
+        loader.add_xpath('added', "./div[contains(@class,'listing-date')]/data-time")
         #loader.add_xpath('last_seen', "./div[contains(@class,'listing-author-name')]/text()")
 
 
@@ -44,5 +44,3 @@ class ElPaisSpider(scrapy.Spider):
         #logging.info(response.css('.listing-author-name').xpath('text()').extract())
 
         return loader.load_item()
-
-

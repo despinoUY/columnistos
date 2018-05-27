@@ -1,5 +1,5 @@
 # Local database
-# No queremos que se haga commit de la base 
+# No queremos que se haga commit de la base
 diarios.sqlite
 *.env
 nbproject/
@@ -109,3 +109,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# No quiero que se commiteen las claves de acceso a la cuenta
+runbottweet.sh

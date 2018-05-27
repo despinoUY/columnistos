@@ -7,7 +7,7 @@ from diarios.items import DiariosItem
 
 
 class LaDiariaSpider(scrapy.Spider):
-    name = 'LaDiaria'
+    name = 'ladiaria'
     allowed_domains = ['findesemana.ladiaria.com.uy']
     start_urls = ['https://findesemana.ladiaria.com.uy/seccion/posturas/']
 
@@ -19,7 +19,7 @@ class LaDiariaSpider(scrapy.Spider):
         @scrapes author title url
         """
         # cintillo
-        response.css('.journalist').xpath("//header[contains(a/@ref,'small')]")
+        selectors = response.css('.section_module').xpath("//div[contains(@class,'ld-card')]")
 
         logging.info(selectors)
 
@@ -31,13 +31,12 @@ class LaDiariaSpider(scrapy.Spider):
 
         loader = ItemLoader(DiariosItem(), selector=selector)
 
-        loader.add_xpath('title', "./h3[contains(@class,'listing-title')]/a/text()")
-        loader.add_xpath('author', "./div[contains(@class,'listing-author-name')]/text()")
-        
+        loader.add_xpath('title',  "./div[contains(@class,'ld-card__body')]/h3[contains(@class,'ld-card__title')]/a/text()")
+        loader.add_xpath('author', "./div[contains(@class,'ld-card__body')]/h3[contains(@class,'ld-card__title')]/a/text()")
 
-        loader.add_xpath('url', "./div[contains(@class,'listing-author-name')]/text()")
-        loader.add_xpath('site', "./div[contains(@class,'listing-author-name')]/text()")
-        loader.add_xpath('added', "./div[contains(@class,'listing-author-name')]/text()")
+
+        loader.add_xpath('url', "./div[contains(@class,'ld-card__body')]/h3[contains(@class,'ld-card__title')]/a/@href")
+        loader.add_xpath('site', "./div[contains(@class,'ld-card__body')]/h3[contains(@class,'ld-card__title')]/a/text()")
         #loader.add_xpath('last_seen', "./div[contains(@class,'listing-author-name')]/text()")
 
 
@@ -46,5 +45,3 @@ class LaDiariaSpider(scrapy.Spider):
         #logging.info(response.css('.listing-author-name').xpath('text()').extract())
 
         return loader.load_item()
-
-
